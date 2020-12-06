@@ -1,4 +1,4 @@
-class GamesController < ApplicationController
+class SongsController < ApplicationController
     before_action :authenticate_user!
 
     def index
