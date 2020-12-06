@@ -1,8 +1,8 @@
 class Category < ApplicationRecord
-    has_many :games
-    has_many :users, through: :games
+    has_many :songs
+    has_many :users, through: :songs
 
-    accepts_nested_attributes_for :restaurants
+    accepts_nested_attributes_for :songs
     
     validates :name, uniqueness: true
 end

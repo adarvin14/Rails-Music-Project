@@ -3,15 +3,15 @@ class SongsController < ApplicationController
 
     def index
        if params[:category_id]
-        @games = Category.find(params[:category_id]).games 
+        @songs = Category.find(params[:category_id]).songs 
        else
-        @games = current_user.games
+        @songs = current_user.songs
        end
     end
 
     def show
-        @game = current_user.games.find_by(id: params[:id])
-        if !@game
+        @song = current_user.songs.find_by(id: params[:id])
+        if !@song
             redirect_to category_path
         end
 
@@ -19,40 +19,40 @@ class SongsController < ApplicationController
 
     def new
         if params[:category_id] && @category = Category.find_by(id: params[:category_id])
-            @game = @category.games.build
+            @song = @category.songs.build
         else
-            @game = Game.new
+            @song = Song.new
         end
 
     def edit
-        @game = Game.find_by(id: params[:id])
+        @song = Song.find_by(id: params[:id])
     end
 
     def create
-        @game = current_user.games.build(game_params)
-        if @game.save
-            redirect_to @game
+        @song = current_user.songs.build(song_params)
+        if @song.save
+            redirect_to @song
         else
             render :new
         end
     end
 
     def update
-        if @game.update(game_params)
-            redirect_to @game
+        if @song.update(song_params)
+            redirect_to @song
         else
             render :edit 
         end
     end
 
     def destroy
-        @game.destroy 
-        redirect_to games_path
+        @song.destroy 
+        redirect_to songs_path
     end
 
     private
 
-    def game_params 
-        params.require(:game).permit(:title, :release_year, :hours_played, :online_multiplayer, :campaign, :campaign_completed, :user_id, :category_id, category_attributes: [ :name ])
+    def song_params 
+        params.require(:song).permit(:title, :release_year, :artist, :album, :genre, :user_id, :category_id, category_attributes: [ :name ])
     end
 end

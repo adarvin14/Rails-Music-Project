@@ -1,4 +1,4 @@
-class Game < ApplicationRecord
+class Song < ApplicationRecord
     belongs_to :category
     belongs_to :user
 
