@@ -1,0 +1,5 @@
+<ul>
+<% @genres.each do |g| %>
+    <li><%= link_to g.name, genre_songs_path(g, @song) %></li><br>
+<% end %>
+</ul>

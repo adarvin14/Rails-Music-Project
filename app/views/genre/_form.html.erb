@@ -1,0 +1,7 @@
+<%= form_for(@genre) do |f| %>
+  
+    <%= f.label "Genre" %>
+    <%= f.text_field :name %>
+
+    <%= f.submit @genre.persisted? "Add Genre" %>
+<% end %>

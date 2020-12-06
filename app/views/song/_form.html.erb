@@ -1,0 +1,45 @@
+<h3>Add a Song To Your Library: </h3>
+<hr>
+<h4>Enter Your Song Information: </h4>
+
+
+<%= form_for(@song) do |s| %>
+    <div class="field_with_errors">
+        <% if @song.errors.any? %>
+            <h3>Errors:</h3>
+            <ul>
+                <% @song.errors.full_messages.each do |m| %>
+                <li><%= m %></li>
+                <% end %>
+            </ul>
+        <% end %>
+    </div>
+
+    <%= f.label "Song" %>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :artist %>
+    <%= f.text_field :artist %>
+    <br>
+    <%= f.label :album %>
+    <%= f.text_field :album %>
+    <br>
+    <%= f.label :release_year %>
+    <%= f.text_field :release_year %>
+    <br>
+
+
+<h4>Genre Info: </h4>
+    <% if @genre %>
+        <%= f.hidden_field :genre_id %>
+    <% else %>
+       <p> Select from an exisiting genre
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "Choose A Genre"  %></p>
+        <p> or create a new genre =>
+        <%= f.fields_for :genre, @song.build_genre do |song_genre| %>
+            <%= song_genre.label "Genre" %>
+            <%= song_genre.text_field :name %>
+        <% end %></p>
+    <% end %>
+    <%= f.submit %>
+<% end %>

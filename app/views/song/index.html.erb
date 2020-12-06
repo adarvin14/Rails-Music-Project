@@ -1,0 +1,18 @@
+<% if @genre %>
+    <hr>
+    <h2> <%= @genre.name %> Songs: </h2>
+<% else %>
+    <hr>
+    <h2>My Songs: </h2>
+<% end %>
+
+<% @songs.each do |s| %>
+    <%= link_to s.title, song_path(s) %><br>
+<% end %>
+<br>
+<br>
+<% if @genre %>
+    <button><%= link_to "Add Song",  new_genre_song_path(@genre) %></button>
+<% else %>
+    <button><%= link_to "Add Song",  new_song_path %></button>
+<% end %>
