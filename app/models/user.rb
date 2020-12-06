@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :genres, through: :songs
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :validatable
 
   def self.from_omniauth(auth)
